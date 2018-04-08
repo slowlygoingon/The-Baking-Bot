@@ -412,7 +412,7 @@ class Moderating:
 
 
 
-def secret_check():
+def secrets_check():
     secrets = ""
     try:
         with open('secrets.txt', 'r') as secret:

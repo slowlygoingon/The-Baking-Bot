@@ -1,3 +1,4 @@
+# Copyright 2018 slowlygoingon, Chanku/Sapein
 import discord
 import asyncio
 import random
@@ -14,7 +15,7 @@ client = discord.Client()
 timenow = datetime.datetime.utcnow()
 
 
-GIPHY_API_KEY = "dc6zaTOxFJmzC"
+GIPHY_API_KEY = ""
 bot.remove_command('help')
 
 @bot.event
@@ -411,12 +412,27 @@ class Moderating:
 
 
 
-
-
+def secret_check():
+    secrets = ""
+    try:
+        with open('secrets.txt', 'r') as secret:
+            secrets = secret.read()
+        discord_key = secrets.split("discord_client_key =")[1].split("\n")[0].strip(" ")
+        giphy_api_key = secrets.split("giphy_api_key =")[1].split("\n")[0].strip(" ")
+        if not discord_key or not giphy_api_key:
+            raise SyntaxError("Missing discord_key or giphy_api_key!")
+    except FileNotFoundError:
+        with open('secrets.txt', 'w') as secret:
+            secret.write("discord_client_key = \n")
+            secret.write("giphy_api_key = \n")
+        raise SyntaxError("Fill in secrets.txt and then re-run!")
+    return discord_key, giphy_api_key
 
 bot.add_cog(Info())
 bot.add_cog(Fun())
 bot.add_cog(MentalHealth())
 bot.add_cog(Moderating())
 
-bot.run('NDI4MjYwODc2NzIyNjM0NzY1.DZxZmw.MRxO1lxV_lReRy5SZ0gLAfOd4kE')
+discord, giphy = secrets_check()
+GIPHY_API_KEY = giphy
+bot.run(discord)

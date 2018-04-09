@@ -432,6 +432,6 @@ bot.add_cog(Fun())
 bot.add_cog(MentalHealth())
 bot.add_cog(Moderating())
 
-discord, giphy = secrets_check()
+discord_key, giphy = secrets_check()
 GIPHY_API_KEY = giphy
-bot.run(discord)
+bot.run(discord_key)

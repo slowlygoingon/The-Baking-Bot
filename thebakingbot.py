@@ -32,19 +32,19 @@ async def echo(ctx, *, message):
     error = discord.Embed(title="Error!", description="Don't ping, thank you.", colour=discord.Colour.red())
     errorm = discord.Embed(title="Error!", description="Did you seriously just try to mass-ping?", colour=discord.Colour.red())
     messagetosend = ("{0.author} just tried to mass-ping.".format(ctx.message))
-    if ('@') in ctx.message.content:
+    if ('@') in ctx.message.content && ('@someone' not in ctx.message.content):
         await bot.say(embed=error)
     if ('@everyone') in ctx.message.content:
         await bot.say(embed=errorm)
         await bot.send_message(await bot.get_user_info("345307151989997568"), messagetosend)
-    if ('@') not in ctx.message.content:
+    if ('@') not in ctx.message.content or ('@someone' in ctx.message.content):
         await bot.say(message)
 
 
 
 
 class Info:
-    
+
     @commands.command()
     async def uptime(self):
         uptimemessage = ("I've been online since " + str(uptimedict['timeuptime']) + " UTC.")
@@ -79,7 +79,7 @@ https://thebakingspot.tumblr.com/faq""")
     async def apps(self):
         await bot.say("""Here is the app to become event manager.
 https://goo.gl/forms/JDNVlMFNb34vk2Ko2
-                   
+
 Here is the app to become staff.
 https://goo.gl/forms/u8EuMf6RiBSFjxqy1""")
 
@@ -93,7 +93,7 @@ https://goo.gl/forms/2pO3gDoxKz45mNh92""")
     @commands.command()
     async def invite(self):
         await bot.say("https://discord.io/thebakingspot")
-        
+
 
     @commands.command(aliases=["help", "cmds", "commandlist", "commandslist"])
     async def commands(self):
@@ -167,7 +167,7 @@ https://media.boingboing.net/wp-content/uploads/2016/11/tumblr_og31bxrtOn1qls18h
 
     @commands.command(aliases=["ground", "dissociation", "panic", "flashbacks", "flashback"])
     async def grounding(self):
-        ground = random.choice(["""Hey there, here are a few ideas to ground yourself. 
+        ground = random.choice(["""Hey there, here are a few ideas to ground yourself.
 These can be useful for dissociation, anxiety, panic attacks, and flashbacks. You can try one, a few, or all of them.
     - Choose a letter of the alphabet and try and come up with as many examples of a category you choose as you can. For example, animals that start with D: dog, deer, dingo, donkey, etc. Or vegetables that start with C: cucumber, cauliflower, celery, etc.
     - Count backwards from 100 by 3s, 6s, or 7s.
@@ -175,7 +175,7 @@ These can be useful for dissociation, anxiety, panic attacks, and flashbacks. Yo
     - Say or think to yourself: "My name is (...). I am safe right now. I am (...) years old and currently at (place). The date is (...). If I need help, I can contact (...). Everything is going to be alright, I can handle this."
     - Name five things that you see, four that you can touch, three that you hear, and two that you smell or taste, and then one thing that you like about yourself.
     - Try this link <https://www.healthyplace.com/blogs/treatinganxiety/2010/09/top-21-anxiety-grounding-techniques/> or <http://did-research.org/treatment/grounding.html> for more.""",
-    """Hey there, here are a few ideas to ground yourself. 
+    """Hey there, here are a few ideas to ground yourself.
 These can be useful for dissociation, anxiety, panic attacks, and flashbacks. You can try one, a few, or all of them.
     - Touch and hold objects around you. Compare the feel, weight, temperature, textures, colors, and materials, describe them to yourself.
     - Squeeze a pillow, stuffed animal, or rubber ball, touch sandpaper (gently), sponges, denim, pop bubble wrap, rip up paper, run lukewarm water on your hands or splash your face with it (be careful).
@@ -183,7 +183,7 @@ These can be useful for dissociation, anxiety, panic attacks, and flashbacks. Yo
     - Put your feet on the floor, gently squeeze or rub your legs and sit upright. 'Push' with your feet, almost as if you wanted to stand up, but do *not* stand up. Notice how your muscles work and how your body tenses.
     - If possible, crack a window and notice the cold air, the new sounds, and all the smells. Describe them to yourself.
     - Try this link <https://www.healthyplace.com/blogs/treatinganxiety/2010/09/top-21-anxiety-grounding-techniques/> or <http://did-research.org/treatment/grounding.html> for more.""",
-    """Hey there, here are a few ideas to ground yourself. 
+    """Hey there, here are a few ideas to ground yourself.
 These can be useful for dissociation, anxiety, panic attacks, and flashbacks. You can try one, a few, or all of them.
     - Ask a friend for a reality-test. If you aren’t sure if something you’re feeling, seeing, hearing or thinking is real, ask a safe friend to help you decide what is fact, what is fiction, what is a flashback, and so on.
     - Do a few jumping jacks, sit-ups, or push-ups.
@@ -358,7 +358,7 @@ https://giphy.com/gifs/dessert-ice-cream-food-ApRorrZknEPw4"""])
             await bot.send_message(await bot.get_user_info("345307151989997568"), messagetosendg)
             return
 
-        
+
         elif keyword:
             keyword = "+".join(keyword)
 
@@ -411,7 +411,6 @@ class Moderating:
             await bot.say(confirm)
 
 
-
 def secrets_check():
     secrets = ""
     try:
@@ -433,6 +432,6 @@ bot.add_cog(Fun())
 bot.add_cog(MentalHealth())
 bot.add_cog(Moderating())
 
-discord, giphy = secrets_check()
+discord_key, giphy = secrets_check()
 GIPHY_API_KEY = giphy
-bot.run(discord)
+bot.run(discord_key)

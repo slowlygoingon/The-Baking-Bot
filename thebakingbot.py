@@ -29,10 +29,10 @@ uptimedict = {'timeuptime': 0}
 
 @bot.command(pass_context=True, aliases=["say", "talk"])
 async def echo(ctx, *, message):
-    error = discord.Embed(title="Error!", description="Don't ping, thank you.", colour=discord.Colour.red())
+    error = discord.Embed(title="Error!", description="Don't ping with bot commands, thank you.", colour=discord.Colour.red())
     errorm = discord.Embed(title="Error!", description="Did you seriously just try to mass-ping?", colour=discord.Colour.red())
     messagetosend = ("{0.author} just tried to mass-ping.".format(ctx.message))
-    if ('@') in ctx.message.content && ('@someone' not in ctx.message.content):
+    if ('@') in ctx.message.content and ('@someone' not in ctx.message.content):
         await bot.say(embed=error)
     if ('@everyone') in ctx.message.content:
         await bot.say(embed=errorm)

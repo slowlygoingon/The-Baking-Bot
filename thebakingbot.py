@@ -28,7 +28,8 @@ async def on_ready():
 
 
 
-
+blacklistn = ["nsfw", "porn", "explicit"]
+blacklistg = ["gore", "violence", "horror", "screamer", "jumpscare"]
 
 uptimedict = {'timeuptime': 0}
 
@@ -68,6 +69,42 @@ async def suggestion(ctx, *, message):
     await bot.delete_message(ctx.message)
 
     
+
+class Moderating:
+
+
+    @commands.command(pass_context = True, aliases=["prune", "purge", "delete"])
+    @commands.has_role("Staff")
+    async def clear(self, ctx, amount):
+        channel = ctx.message.channel
+        for amount in range(int(amount), 0, -100):
+            await bot.purge_from(channel, limit=int(amount))
+
+    @commands.command(pass_context = True)
+    @commands.has_role("Staff")
+    async def gifblacklistg(self, ctx, something):
+        n = 0
+        confirm = something + " has been added to the blacklist."
+        if len(str(something)) > n:
+            list.append(blacklistg, something)
+            await bot.say(confirm)
+        else:
+            em = discord.Embed(title="Error", description="Please input a keyword.", colour=discord.Colour.red())
+            await bot.say(embed=em)
+
+
+    @commands.command(pass_context = True)
+    @commands.has_role("Staff")
+    async def gifblacklistn(self, ctx, something=None):
+        n = 0
+        if something is None:
+            em = discord.Embed(title="Error", description="Please input a keyword.", colour=discord.Colour.red())
+            await bot.say(embed=em)
+        elif len(str(something)) > n:
+            confirm = something + " has been added to the blacklist."
+            list.append(blacklistn, something)
+            await bot.say(confirm)
+
 
 class Info:
 
@@ -457,41 +494,7 @@ https://giphy.com/gifs/dessert-ice-cream-food-ApRorrZknEPw4"""])
             em = discord.Embed(title="Error", description="Please input a keyword.", colour=discord.Colour.red())
             await bot.say(embed=em)
 
-class Moderating:
 
-    @commands.command(pass_context = True, aliases=["prune", "purge", "delete"])
-    @commands.has_role("Staff")
-    async def clear(self, ctx, amount):
-        channel = ctx.message.channel
-        for amount in range(int(amount), 0, -100):
-            await bot.purge_from(channel, limit=int(amount))
-
-    @commands.command(pass_context = True)
-    @commands.has_role("Staff")
-    async def gifblacklistg(self, ctx, something):
-        n = 0
-        confirm = something + " has been added to the blacklist."
-        if len(str(something)) > n:
-            blacklistg = ["gore", "violence", "horror", "screamer", "jumpscare"]
-            list.append(blacklistg, something)
-            await bot.say(confirm)
-        else:
-            em = discord.Embed(title="Error", description="Please input a keyword.", colour=discord.Colour.red())
-            await bot.say(embed=em)
-
-
-    @commands.command(pass_context = True)
-    @commands.has_role("Staff")
-    async def gifblacklistn(self, ctx, something=None):
-        n = 0
-        if something is None:
-            em = discord.Embed(title="Error", description="Please input a keyword.", colour=discord.Colour.red())
-            await bot.say(embed=em)
-        elif len(str(something)) > n:
-            confirm = something + " has been added to the blacklist."
-            blacklistn = ["nsfw", "porn", "explicit"]
-            list.append(blacklistn, something)
-            await bot.say(confirm)
 
 
 def secrets_check():

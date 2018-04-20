@@ -14,8 +14,6 @@ bot = commands.Bot(description="The Baking Bot is the amazing official bot for t
 client = discord.Client()
 timenow = datetime.datetime.utcnow()
 
-
-GIPHY_API_KEY = ""
 bot.remove_command('help')
 
 @bot.event
@@ -23,6 +21,13 @@ async def on_ready():
     readymessage = ("Hello, I'm ready! It is " + str(timenow))
     uptimedict['timeuptime'] = timenow
     print(readymessage)
+
+@client.event
+async def on_ready():
+    await client.change_presence(game=discord.Game(name="with a cake"))
+
+
+
 
 
 uptimedict = {'timeuptime': 0}
@@ -40,8 +45,29 @@ async def echo(ctx, *, message):
     if ('@') not in ctx.message.content or ('@someone' in ctx.message.content):
         await bot.say(message)
 
+@bot.command(pass_context=True, aliases=["urgentreport", "reporturgent"])
+async def urgent(ctx, *, message):
+    messagetosend = """User **{0.author}** sent the following report:
+
+'""".format(ctx.message) + message + "'"
+    await bot.delete_message(ctx.message)
+    await bot.send_message(await bot.get_user_info("345307151989997568"), messagetosend)
+    await bot.send_message(await bot.get_user_info("295612342274621442"), messagetosend)
+    await bot.send_message(await bot.get_user_info("369984506809155586"), messagetosend)
+    await bot.send_message(await bot.get_user_info("152190605970112512"), messagetosend)
+    await bot.send_message(await bot.get_user_info("339886120407924736"), messagetosend)
 
 
+@bot.command(pass_context=True, aliases=["suggest", "report"])
+async def suggestion(ctx, *, message):
+    messagetosend = """User **{0.author}** suggested/reported the following:
+
+'""".format(ctx.message) + message + "'"
+    channel = bot.get_channel("427219707683405844")
+    await bot.send_message(channel, messagetosend)
+    await bot.delete_message(ctx.message)
+
+    
 
 class Info:
 
@@ -79,13 +105,12 @@ https://thebakingspot.tumblr.com/faq""")
     async def apps(self):
         await bot.say("""Here is the app to become event manager.
 https://goo.gl/forms/JDNVlMFNb34vk2Ko2
-
 Here is the app to become staff.
 https://goo.gl/forms/u8EuMf6RiBSFjxqy1""")
 
 
-    @commands.command()
-    async def report(self):
+    @commands.command(aliases=["feedbackform"])
+    async def feedback(self):
         await bot.say("""Send a completely anonymous report or feedback regarding the server, other members, or Staff.
 https://goo.gl/forms/2pO3gDoxKz45mNh92""")
 
@@ -97,41 +122,49 @@ https://goo.gl/forms/2pO3gDoxKz45mNh92""")
 
     @commands.command(aliases=["help", "cmds", "commandlist", "commandslist"])
     async def commands(self):
-        em = discord.Embed(title="COMMANDS LIST", description="""All the commands of The Baking Bot, the official bot for The Baking Spot.
+        em = discord.Embed(description="""These are all the commands of The Baking Bot, the official bot for The Baking Spot.
 The words in [] are aliases.
-If you need help with mental health, please check the Mental Health section on the server and in this message.""", colour=discord.Colour.green())
-        em.add_field(name="Info", value="""info   -   Shows basic info about the bot. [about]
-uptime   -   Shows the bot's uptime.
-commands  -   Shows this message. [help, commandslist]""", inline=False)
-        em.add_field(name="Mental health", value="""anxiety   -   Breathing gif. [anxious, breathing, calm]
-grounding   -   Grounding exercises. [dissociation, panic, flashbacks]
-emergency   -   Links to a page with emergency resources.
-positivity   -   Displays a random positive/nice gif.
-therapy   -   Wanna start looking for low cost/free therapy? [cheaptherapy, freetherapy]
-support   -   If you need help or advice, check this out. [getsupport, gethelp]""", inline=False)
-        em.add_field(name="Fun and misc.", value="""say   -   Bot repeats what you say.
-compliment   -   Displays a random compliment or says something reassuring. [randomcompliment]
-dice   -   Throws a dice. [dicethrow, throwdice]
-coinflip   -   Flips a coin. [coin, flipcoin]
-question   -   Ask the bot a yes or no question. [ask]
-randomgif   -   Sends a random gif from giphy. [gifrandom, gif]
-dessert   -   Displays a random gif of a dessert.
-cornyjoke   -   Makes a corny joke. [joke, pun, randomjoke, randompun]""", inline=False)
-        em.add_field(name="Moderating (Staff only)", value="""clear   -   Delete messages. [prune, purge, delete]
-gifblacklistn   -   Adds a word to the NSFW blacklist.
-gifblacklistg   -   Adds a word to the violence blacklist.
+If you need help with mental health, please check the Mental Health section on the server and in this message.
+
+•  •  •  •  •  •  •  •""", colour=discord.Colour.green())
+        em.add_field(name="INFO", value="""**info**   -   Shows basic info about the bot. [about]
+**uptime**   -   Shows the bot's uptime.
+**commands**   -   Shows this message. [help, commandslist]
+**ping**   -   Are you alive, bot?""", inline=False)
+        em.add_field(name="MENTAL HEALTH", value="""**anxiety**   -   Breathing gif. [anxious, breathing, calm]
+**grounding**   -   Grounding exercises. [dissociation, panic, flashbacks]
+**emergency**   -   Links to a page with emergency resources. Use this in case of serious suicidal ideation.
+**support**   -   If you need help or advice urgently, check this out. [getsupport, gethelp]
+**positivity**   -   Displays a random nice little gif! [positive]
+**therapy**   -   So you're looking for therapy? [therapist, counsellor, counselling]
+**cheaptherapy**   -   If you're looking for low-cost/online therapy. [onlinetherapy, lowcosttherapy]
+**database**   -   Various databases for group therapy, therapists, and so on. [therapydatabase]
 """, inline=False)
-        em.add_field(name="Server-related", value="""faq   -   Displays link to our FAQ page on Tumblr.
-tumblr   -   Displays link to the official Tumblr.
-staffapp   -   Displays link to all the application forms. [apps]
-report   -   Displays link for the anonymous report/feedback form.
-invite   -   Permanent invite to The Baking Spot.""")
+        em.add_field(name="FUN AND MISC.", value="""**say**   -   Bot repeats what you say. [echo]
+**compliment**   -   Displays a random compliment or says something reassuring. [randomcompliment, reassuring]
+**dice**   -   Throws a dice. [dicethrow, throwdice]
+**coinflip**   -   Flips a coin. [coin, flipcoin]
+**question**   -   Ask the bot a yes or no question. [ask]
+**randomgif**   -   Sends a random gif from giphy. [gifrandom, gif]
+**dessert**   -   Displays a random gif of a dessert.
+**cornyjoke**   -   Makes a corny joke. [joke, pun, randomjoke, randompun]""", inline=False)
+        em.add_field(name="MODERATING (Staff only)", value="""**clear**   -   Delete messages. [prune, purge, delete]
+**gifblacklistn**   -   Adds a word to the NSFW blacklist.
+**gifblacklistg**   -   Adds a word to the violence blacklist.
+""", inline=False)
+        em.add_field(name="SERVER-RELATED", value="""**faq**   -   Displays link to our FAQ page on Tumblr.
+**tumblr**   -   Link to the official Tumblr.
+**staffapp**   -   Link to all the application forms. [apps]
+**report**   -   Send a (non-urgent) report or suggestion to Staff, regular members will NOT see your message. [suggestion]
+**urgentreport**   -   Send an __urgent__ report to Staff, regular members will NOT see your message. __Do not abuse this command.__ [urgent, reporturgent]
+**feedback**   -   Send feedback, suggestions, or reports through an anonymous form. Nobody, not even Staff, will know who sent it. [feedbackform]
+**invite**   -   Permanent invite to The Baking Spot!""")
         await bot.say (embed=em)
 
 
 class MentalHealth:
 
-    @commands.command()
+    @commands.command(aliases=["positive"])
     async def positivity(self):
         pos = random.choice(["""Hey there, here's your daily nice gif.
         https://giphy.com/gifs/studiosoriginals-domitille-collardey-l41Yh1olOKd1Tgbw4""", """Hey there, here's your daily nice gif. (source: teenypinkbunny)
@@ -197,21 +230,21 @@ These can be useful for dissociation, anxiety, panic attacks, and flashbacks. Yo
     @commands.command(aliases=["gethelp", "getsupport"])
     async def support(self):
             websites = """If you need advice/help or to vent, here are some links for you.
-
 <https://www.7cups.com>
 <https://mellowtalk.com/>
 <http://blahtherapy.com/chat-hub/>
-<http://blahtherapy.com/>
 <https://ginger.io/>
+<https://kooth.com/>
 <https://www.iprevail.com/>
 <https://www.imalive.org/>
 <https://www.reddit.com/r/KindVoice/>
 <https://thebakingspot.tumblr.com/ineedhelp>"""
             await bot.say(websites)
 
-    @commands.command(aliases=["cheaptherapy", "therapy"])
+    @commands.command(aliases=["cheaptherapy", "lowcosttherapy", "onlinetherapy"])
     async def freetherapy(self):
-            websites = """Here are some places to get free or low-cost professional help.
+            websites = """Here are some places to get free or low-cost professional help online.
+We also recommend you try the `tbs!database` command.
 
 <https://www.talkspace.com/>
 <http://blahtherapy.com/>
@@ -219,6 +252,54 @@ These can be useful for dissociation, anxiety, panic attacks, and flashbacks. Yo
 <https://www.iprevail.com/>
 <https://trauma-crocodile.tumblr.com/supportmentalhealth>"""
             await bot.say(websites)
+
+    @commands.command(aliases=["counsellor", "therapist", "counselling"])
+    async def therapy(self):
+        message = discord.Embed(title="Commands", description ="""Hello! If you are looking for low-cost or free therapy, please use
+the command `tbs!freetherapy`.
+If you're looking for therapist databases instead, please use
+the command `tbs!database`.""", colour=discord.Colour.green())
+        await bot.say(embed=message)
+            
+
+    @commands.command(aliases=["database", "databasetherapy"])
+    async def therapydatabase(self):
+            websites = """Here are some databases to find a therapist (counsellor, psychologist, psychiatrist, LMFT, etc.) or other types of treatment, such as support groups or facilities.
+
+**International or multiple countries**
+<https://members.nielasher.com/>
+<http://www.therapistlocator.net/imis15/tl/Default.aspx>
+<https://www.therapytribe.com/>
+<https://www.onlinecounselling.com/therapist-finder/>
+<https://www.goodtherapy.org/international-search.html>
+<https://help.recoverywarriors.com/listings/?search_keywords=&search_location=&search_radius=500&search_lat=0&search_lng=0&search_region=>
+
+**USA & Canada**
+<https://www.sidran.org/help-desk/get-help/>
+<https://anxietydepressionassoc.site-ym.com/?page=FATMain>
+<https://www.networktherapy.com/directory/find_therapist.asp>
+<https://www.psychologytoday.com/us/therapists/>
+<http://www.findcbt.org/xFAT/index.cfm>
+<http://www.isst-d.org/default.asp?contentID=18>
+
+**UK**
+<https://www.bps.org.uk/public/find-psychologist>
+<https://www.psychotherapy.org.uk/>
+<https://www.bacp.co.uk/>
+<https://www.nhs.uk/Service-Search/Psychological%20therapies%20(IAPT)/LocationSearch/10008>
+<http://www.callhelpline.org.uk/Help.asp#search>
+<http://www.gofal.org.uk/journeys/>
+<https://www.bpdworld.org/therapeutic-communities.html>
+<https://www.beateatingdisorders.org.uk/support-services/online-groups>
+
+**Australia**
+<https://www.1800respect.org.au/services/>
+<http://www.oneinthree.com.au/servicesandresources/>
+<https://lysnhealth.com.au/>
+<https://www.psychology.org.au/Find-a-Psychologist>
+"""
+            await bot.say(websites)
+
 
 class Fun:
 
@@ -236,7 +317,7 @@ class Fun:
                                 "You are deserving of a hug right now.", "You're more helpful than you realize.",
                                 "You can inspire people.", "I bet you do the crossword puzzle in ink.",
                                 "You're someone's reason to smile, even if you don't realize it.",
-                                "It's so great to see you're doing your best", "Your smile can make someone's day.",
+                                "It's so great to see you're doing your best.", "Your smile can make someone's day.",
                                 "You've always ben able to always figure out how to pick yourself up.", "Your ideas matter.",
                                 "Your feelings matter.", "Your emotions matter.", "Your opinions matter.", "Your needs matter.",
                                 "Your own vision of the world is unique and interesting.",
@@ -249,7 +330,8 @@ class Fun:
                                 "You deserve to be heard.", "You deserve to be respected.", "You're an absolute bean.",
                                 "You’re trying your best and everyone sees that.",
                                 "Even if you feel like you're getting nowhere you're still one step ahead of yesterday - and that's still progress.",
-                                "You're growing so much, and if you can't see it now, you certainly will in a few months."])
+                                "You're growing so much, and if you can't see it now, you certainly will in a few months.",
+                                "You're strong for going on even when it's so hard."])
         await bot.say(randomcomp)
 
 
@@ -259,11 +341,12 @@ class Fun:
         await bot.say(throw)
 
 
+
+
     @commands.command(pass_context=True)
     async def emergency(self, ctx):
         await bot.say("""Hey there {0}, if anyone you know is in any kind of emergency, please visit the following page:
 https://thebakingspot.tumblr.com/ineedhelp
-
 I suggest you also try the `tbs!help`, `tbs!support` and `tbs!therapy` commands - in the appropriate bot channel.""".format(ctx.message.author.mention))
 
 
@@ -286,7 +369,7 @@ I suggest you also try the `tbs!help`, `tbs!support` and `tbs!therapy` commands 
                                     "Why do musicians always get good grades? They have lots of notes.",
                                     "What did the traffic light say to the car? Don’t look! I’m about to change.",
                                     "Why was the little strawberry crying? Its mom was in a jam.",
-                                    "Why are frogs are so happy? They eat whatever bugs them.",
+                                    "Why are frogs so happy? They eat whatever bugs them.",
                                     "What do you call a guy with a rubber toe? Roberto.",
                                     "What do you call a bee that’s having a bad hair day? A frisbee.",
                                     "Why wouldn’t the shrimp share his treasure? Because it was a little shellfish.",

@@ -11,10 +11,14 @@ from discord.ext import commands
 
 
 bot = commands.Bot(description="The Baking Bot is the amazing official bot for the community & mental health server The Baking Spot. As of now, it has very basic commands, but we hope to implement more of them in the future!", command_prefix="tbs!")
-client = discord.Client()
 timenow = datetime.datetime.utcnow()
 
 bot.remove_command('help')
+
+@bot.event
+async def on_ready():
+    await bot.change_presence(game=discord.Game(name="with a cake"))
+
 
 @bot.event
 async def on_ready():
@@ -22,10 +26,20 @@ async def on_ready():
     uptimedict['timeuptime'] = timenow
     print(readymessage)
 
-@client.event
-async def on_ready():
-    await client.change_presence(game=discord.Game(name="with a cake"))
 
+@bot.event
+async def on_member_join(member):
+    msg = discord.Embed(title="Welcome!", description="""Welcome to The Baking Spot!
+TBS is a server centered around **community** (events, fun, and making friends) and **mental health** (recovery and awareness).
+The main purpose of this server is to relax, have fun, discuss mental health with people who can understand your mental health journey, and encourage each other positively.
+
+.""", colour=discord.Colour.green())
+    msg.add_field(name="How to enter", value="""It's normal if you see few channels: to get full access, just read the #rules channel from the beginning. It should take no more than about 3-4 minutes, but don't skip any part!
+We have 2+5 channels (many are opt-in) about any kind of topic and interest - yes even baking!
+If you have any problem, contact @Staff.
+
+We hope you have fun with us!""", inline=False)
+    await bot.send_message(member, embed=msg)
 
 
 blacklistn = ["nsfw", "porn", "explicit"]
@@ -86,7 +100,7 @@ class Moderating:
         n = 0
         confirm = something + " has been added to the blacklist."
         if len(str(something)) > n:
-            list.append(blacklistg, something)
+            blacklistg.append(something)
             await bot.say(confirm)
         else:
             em = discord.Embed(title="Error", description="Please input a keyword.", colour=discord.Colour.red())
@@ -102,7 +116,7 @@ class Moderating:
             await bot.say(embed=em)
         elif len(str(something)) > n:
             confirm = something + " has been added to the blacklist."
-            list.append(blacklistn, something)
+            blacklistn.append(something)
             await bot.say(confirm)
 
 

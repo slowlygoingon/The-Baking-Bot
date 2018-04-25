@@ -27,6 +27,26 @@ async def on_ready():
     print(readymessage)
 
 
+@bot.command(pass_context=True, aliases=["cookie"])
+async def givecookie(ctx):
+    if ctx.message.server.me.mention in ctx.message.content:
+        await bot.say("Thank you, I love cookies!")
+    elif '@' in ctx.message.content:
+        await bot.say("You just gave them a cookie. How sweet of you!")
+    elif 'me' in ctx.message.content or 'Me' in ctx.message.content:
+        await bot.say("Enjoy your cookie!")
+
+
+@bot.command(pass_context=True, aliases=["hug", "hugs", "givehugs"])
+async def givehug(ctx):
+    if ctx.message.server.me.mention in ctx.message.content:
+        await bot.say("T-thank you! I feel so loved now...")
+    elif '@' in ctx.message.content:
+        await bot.say("You just received a warm hug!")
+    elif 'me' in ctx.message.content:
+        await bot.say("All the hugs for you!")
+
+
 @bot.event
 async def on_member_join(member):
     msg = discord.Embed(title="Welcome!", description="""Welcome to The Baking Spot!
@@ -198,7 +218,9 @@ If you need help with mental health, please check the Mental Health section on t
 **question**   -   Ask the bot a yes or no question. [ask]
 **randomgif**   -   Sends a random gif from giphy. [gifrandom, gif]
 **dessert**   -   Displays a random gif of a dessert.
-**cornyjoke**   -   Makes a corny joke. [joke, pun, randomjoke, randompun]""", inline=False)
+**cornyjoke**   -   Makes a corny joke. [joke, pun, randomjoke, randompun]
+**givecookie**   -   Give someone a cookie. [cokie]
+**hug**   -   Give someone a hug. [givehug, hugs, givehugs]""", inline=False)
         em.add_field(name="MODERATING (Staff only)", value="""**clear**   -   Delete messages. [prune, purge, delete]
 **gifblacklistn**   -   Adds a word to the NSFW blacklist.
 **gifblacklistg**   -   Adds a word to the violence blacklist.
@@ -359,6 +381,7 @@ class Fun:
     async def coinflip(self):
         choices = random.choice(['Heads!', 'Tails!'])
         await bot.say(choices)
+
 
     @commands.command(aliases=["reassuring", "randomcompliment", "comfort", "comforting"])
     async def compliment(self):

@@ -49,16 +49,20 @@ async def givehug(ctx):
 
 @bot.event
 async def on_member_join(member):
-    msg = discord.Embed(title="Welcome!", description="""Welcome to The Baking Spot!
+    msg = discord.Embed(title="Welcome!", description="""Hey there. Welcome to The Baking Spot!
 TBS is a server centered around **community** (events, fun, and making friends) and **mental health** (recovery and awareness).
-The main purpose of this server is to relax, have fun, discuss mental health with people who can understand your mental health journey, and encourage each other positively.
+The main purpose of this server is to relax, have fun, discuss mental health with people who can relate to the process of recovery, and encourage each other positively.
 
-.""", colour=discord.Colour.green())
-    msg.add_field(name="How to enter", value="""It's normal if you see few channels: to get full access, just read the #rules channel from the beginning. It should take no more than about 3-4 minutes, but don't skip any part!
-We have 2+5 channels (many are opt-in) about any kind of topic and interest - yes even baking!
-If you have any problem, contact @Staff.
+We have 25+ channels (many are opt-in) about any kind of topic and interest - yes even baking - and many events and activities!
+Everyone can find their place in TBS and make meaningful connections with our welcoming, friendly members.
+Come join our not-so-little family!
 
-We hope you have fun with us!""", inline=False)
+We hope you'll have fun with us!
+""", colour=discord.Colour.green())
+    msg.add_field(name="How to enter and FAQ's", value="""**'I can only see a couple channels though!' Yes, that's normal! To get full access, just read the #rules carefully from the beginning. It should take no more than 3-4 minutes, but don't skip any part!
+***'I cannot get roles aside from pronouns!' That's because you need to get access to the server first. All instructions are in the #rules. :)
+
+If you have any problem, contact @Staff.""", inline=False)
     await bot.send_message(member, embed=msg)
 
 
@@ -257,7 +261,13 @@ class MentalHealth:
         https://78.media.tumblr.com/4b8c9b079cd3da2d74275d3063d83b72/tumblr_oxidf7tQjz1ut0lfho1_500.gif""", """Hey there, here's your daily nice gif. (source: magical-latte)
         https://78.media.tumblr.com/d2fa0d7d4ca67af23750bb79a674d5c2/tumblr_p67f6ugJp91x69labo1_500.gif""", """Hey there, here's your daily nice gif.
         https://78.media.tumblr.com/85efdd7380284bd7279a0839e9674f96/tumblr_oqish5aNqX1ufccs2o1_500.gif""", """Hey there, here's your daily nice gif. (source: faiemagick)
-        https://78.media.tumblr.com/bf7cad140e3e113cd4062b0377842ca3/tumblr_otogrpArAo1wo3hpco1_1280.gif"""])
+        https://78.media.tumblr.com/bf7cad140e3e113cd4062b0377842ca3/tumblr_otogrpArAo1wo3hpco1_1280.gif""", """Hey there, here's your daily nice gif. (source: positiveupwardspiral)
+        https://78.media.tumblr.com/4cf6ff2fbcca94dfa9a3e95d5e7cbd2f/tumblr_oy76dlgl6O1vimk88o1_400.gif""", """Hey there, here's your daily nice gif. (source: positiveupwardspiral)
+        https://78.media.tumblr.com/f2901a6fa84f06f88c1c20dc260cef3d/tumblr_paydjtDqnD1vimk88o1_400.gif""", """Hey there, here's your daily nice gif. (source: positiveupwardspiral)
+        https://78.media.tumblr.com/a7de17b03fa4dabec7a59e63c2284bec/tumblr_p8u6tsXK5i1vimk88o1_400.gif""", """Hey there, here's your daily nice gif. (source: positiveupwardspiral)
+        https://78.media.tumblr.com/e98f7fd0d8481995741425b078b28d10/tumblr_p6zqapmqTZ1vimk88o1_400.gif""", """Hey there, here's your daily nice gif. (source: positiveupwardspiral)
+        https://78.media.tumblr.com/81f07b56497be508aa8e4003c4770966/tumblr_oz33euxa0t1vimk88o1_500.gif""", """Hey there, here's your daily nice gif. (source:  earthboundtext)
+        https://78.media.tumblr.com/13766f3f5fa589b106c0d669303b60fb/tumblr_noapzxSc2S1skpglvo1_500.gif"""])
         await bot.say(pos)
 
     @commands.command(aliases=["breathing", "calm", "anxious", "breathe"])
@@ -389,10 +399,11 @@ class Fun:
                                 "Your light shines so brightly.", "You matter, and a lot.",
                                 "You are so brave.", "You have an incredible talent even if you don't see it.",
                                 "You are deserving of a hug right now.", "You're more helpful than you realize.",
-                                "You can inspire people.", "I bet you do the crossword puzzle in ink.",
+                                "You can inspire people.", "I bet you do the crossword puzzle in ink.", 
+                                "You are more than what you can offer people, be it your help, or kindness, or favors.",
                                 "You're someone's reason to smile, even if you don't realize it.",
                                 "It's so great to see you're doing your best.", "Your smile can make someone's day.",
-                                "You've always ben able to always figure out how to pick yourself up.", "Your ideas matter.",
+                                "You've always been able to always figure out how to pick yourself up.", "Your ideas matter.",
                                 "Your feelings matter.", "Your emotions matter.", "Your opinions matter.", "Your needs matter.",
                                 "Your own vision of the world is unique and interesting.",
                                 "Even if you were cloned, you'd still be one of a kind. (And the better one between the two.)",
@@ -405,7 +416,7 @@ class Fun:
                                 "You’re trying your best and everyone sees that.",
                                 "Even if you feel like you're getting nowhere you're still one step ahead of yesterday - and that's still progress.",
                                 "You're growing so much, and if you can't see it now, you certainly will in a few months.",
-                                "You're strong for going on even when it's so hard."])
+                                "You're strong for going on even when it's so hard.", "Being kind to everyone is important - and that includes to yourself."])
         await bot.say(randomcomp)
 
 
@@ -494,7 +505,14 @@ https://giphy.com/gifs/fruit-7z4lmNtTmuREI""", """Here's your random dessert.
 https://giphy.com/gifs/shakingfoodgifs-food-dessert-pie-pdfnRGpNQzePC""", """Here's your random dessert.
 https://giphy.com/gifs/white-dessert-sphere-rczvneQ6Ziwx2""", """Here's your random dessert.
 https://giphy.com/gifs/donut-drool-enchanting-arEGphwGhT7dC""", """Here's your random dessert.
-https://giphy.com/gifs/dessert-ice-cream-food-ApRorrZknEPw4"""])
+https://giphy.com/gifs/dessert-ice-cream-food-ApRorrZknEPw4""", """"Here's your random dessert. (source: freshcravings)
+https://78.media.tumblr.com/134518178c6ea265f0f35bd47919b8a3/tumblr_oek3niprsr1ubgv9go1_500.gif""", """"Here's your random dessert. (source: autumncozy)
+https://78.media.tumblr.com/46b33a694b5235e438a2b0d78c13f086/tumblr_pb4y0mcdWQ1qhoe3vo1_500.gif""", """"Here's your random dessert. (source: butteryplanet)
+https://78.media.tumblr.com/871106c3587147be04a10afda2614b91/tumblr_odg4huTCZU1u9ooogo1_500.gif""", """"Here's your random dessert. (source: freshcravings)
+https://78.media.tumblr.com/385cc77b180627a9fb33fab2dc079747/tumblr_oek3kbur5r1ubgv9go1_500.gif""", """"Here's your random dessert. (source: butteryplanet)
+https://78.media.tumblr.com/c52d92793ca18ce47ec72ce67bc53898/tumblr_nntuzmqdDu1u9ooogo1_500.gif""", """"Here's your random dessert. (source: midnightinparis(
+https://78.media.tumblr.com/33485ac13753e6314c9c17b085f1687e/tumblr_nqpu1g9vmj1qll5dxo1_500.gif""", """"Here's your random dessert. (source: tokkeki)
+https://78.media.tumblr.com/23e10562c9fc348c81ff46c0c2e5da0c/tumblr_nwqw89NX0V1ujktejo1_500.gif"""])
         await bot.say(dessert)
 
 

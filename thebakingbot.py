@@ -52,16 +52,13 @@ async def on_member_join(member):
     msg = discord.Embed(title="Welcome!", description="""Hey there. Welcome to The Baking Spot!
 TBS is a server centered around **community** (events, fun, and making friends) and **mental health** (recovery and awareness).
 The main purpose of this server is to relax, have fun, discuss mental health with people who can relate to the process of recovery, and encourage each other positively.
-
 We have 25+ channels (many are opt-in) about any kind of topic and interest - yes even baking - and many events and activities!
 Everyone can find their place in TBS and make meaningful connections with our welcoming, friendly members.
 Come join our not-so-little family!
-
 We hope you'll have fun with us!
 """, colour=discord.Colour.green())
     msg.add_field(name="How to enter and FAQ's", value="""**'I can only see a couple channels though!' Yes, that's normal! To get full access, just read the #rules carefully from the beginning. It should take no more than 3-4 minutes, but don't skip any part!
 ***'I cannot get roles aside from pronouns!' That's because you need to get access to the server first. All instructions are in the #rules. :)
-
 If you have any problem, contact @Staff.""", inline=False)
     await bot.send_message(member, embed=msg)
 
@@ -87,7 +84,6 @@ async def echo(ctx, *, message):
 @bot.command(pass_context=True, aliases=["urgentreport", "reporturgent"])
 async def urgent(ctx, *, message):
     messagetosend = """User **{0.author}** sent the following report:
-
 '""".format(ctx.message) + message + "'"
     await bot.delete_message(ctx.message)
     await bot.send_message(await bot.get_user_info("345307151989997568"), messagetosend)
@@ -100,7 +96,6 @@ async def urgent(ctx, *, message):
 @bot.command(pass_context=True, aliases=["suggest", "report"])
 async def suggestion(ctx, *, message):
     messagetosend = """User **{0.author}** suggested/reported the following:
-
 '""".format(ctx.message) + message + "'"
     channel = bot.get_channel("427219707683405844")
     await bot.send_message(channel, messagetosend)
@@ -178,23 +173,21 @@ https://thebakingspot.tumblr.com/faq""")
 
     @commands.command(aliases=["app", "staffapp", "staffapps", "application"])
     async def apps(self):
-        await bot.say("""Here is the app to become **Event manager**.
-https://goo.gl/forms/lIGVzairqpCB4Zc32
-
-Here is the app to become **Staff**.
-https://goo.gl/forms/RqzSFCJsOVM4jUMi2""")
+        await bot.say("""Here is the app to become event manager.
+https://goo.gl/forms/JDNVlMFNb34vk2Ko2
+Here is the app to become staff.
+https://goo.gl/forms/u8EuMf6RiBSFjxqy1""")
 
 
     @commands.command(aliases=["feedbackform"])
     async def feedback(self):
         await bot.say("""Send a completely anonymous report or feedback regarding the server, other members, or Staff.
-        
 https://goo.gl/forms/2pO3gDoxKz45mNh92""")
 
 
     @commands.command()
     async def invite(self):
-        await bot.say("https://discord.gg/dzDR2MF")
+        await bot.say("https://discord.io/thebakingspot")
 
 
     @commands.command(aliases=["help", "cmds", "commandlist", "commandslist"])
@@ -202,14 +195,13 @@ https://goo.gl/forms/2pO3gDoxKz45mNh92""")
         em = discord.Embed(description="""These are all the commands of The Baking Bot, the official bot for The Baking Spot.
 The words in [] are aliases.
 If you need help with mental health, please check the Mental Health section on the server and in this message.
-
 •  •  •  •  •  •  •  •""", colour=discord.Colour.green())
         em.add_field(name="INFO", value="""**info**   -   Shows basic info about the bot. [about]
 **uptime**   -   Shows the bot's uptime.
 **commands**   -   Shows this message. [help, commandslist]
 **ping**   -   Are you alive, bot?""", inline=False)
         em.add_field(name="MENTAL HEALTH", value="""**anxiety**   -   Breathing gif. [anxious, breathing, calm]
-**grounding**   -   Grounding techniques. [dissociation, panic, flashbacks]
+**grounding**   -   Grounding exercises. [dissociation, panic, flashbacks]
 **emergency**   -   Links to a page with emergency resources. Use this in case of serious suicidal ideation.
 **support**   -   If you need help or advice urgently, check this out. [getsupport, gethelp]
 **positivity**   -   Displays a random nice little gif! [positive]
@@ -222,10 +214,11 @@ If you need help with mental health, please check the Mental Health section on t
 **dice**   -   Throws a dice. [dicethrow, throwdice]
 **coinflip**   -   Flips a coin. [coin, flipcoin]
 **question**   -   Ask the bot a yes or no question. [ask]
+**randomgif**   -   Sends a random gif from giphy. [gifrandom, gif]
 **dessert**   -   Displays a random gif of a dessert.
 **cornyjoke**   -   Makes a corny joke. [joke, pun, randomjoke, randompun]
-**cookie**   -   Give someone a cookie.
-**hug**   -   Give someone a hug.""", inline=False)
+**givecookie**   -   Give someone a cookie. [cokie]
+**hug**   -   Give someone a hug. [givehug, hugs, givehugs]""", inline=False)
         em.add_field(name="MODERATING (Staff only)", value="""**clear**   -   Delete messages. [prune, purge, delete]
 **gifblacklistn**   -   Adds a word to the NSFW blacklist.
 **gifblacklistg**   -   Adds a word to the violence blacklist.
@@ -279,8 +272,7 @@ https://i.imgur.com/XbH6gP4.gif""", """Hello there, here's a gif for a breathing
 https://media.giphy.com/media/8YfwmT1T8PsfC/giphy.gif""", """Hello there, here's a gif for a breathing exercise.
 http://karlolabs.com/wp-content/uploads/2017/01/breathing.gif""", """Hello there, here's a gif for a breathing exercise.
 http://i67.tinypic.com/2qant76.gif""", """Hello there, here's a gif for a breathing exercise.
-https://media.boingboing.net/wp-content/uploads/2016/11/tumblr_og31bxrtOn1qls18ho6_400.gif""", """Hello there, here's a gif for a breathing exercise.
-https://www.mindful.org/wp-content/uploads/MndfulBeath.gif"""])
+https://media.boingboing.net/wp-content/uploads/2016/11/tumblr_og31bxrtOn1qls18ho6_400.gif"""])
         await bot.say(image)
 
     @commands.command(aliases=["ground", "dissociation", "panic", "flashbacks", "flashback"])
@@ -330,7 +322,6 @@ These can be useful for dissociation, anxiety, panic attacks, and flashbacks. Yo
     async def freetherapy(self):
             websites = """Here are some places to get free or low-cost professional help online.
 We also recommend you try the `tbs!database` command.
-
 <https://www.talkspace.com/>
 <http://blahtherapy.com/>
 <https://www.betterhelp.com/>
@@ -350,7 +341,6 @@ the command `tbs!database`.""", colour=discord.Colour.green())
     @commands.command(aliases=["database", "databasetherapy"])
     async def therapydatabase(self):
             websites = """Here are some databases to find a therapist (counsellor, psychologist, psychiatrist, LMFT, etc.) or other types of treatment, such as support groups or facilities.
-
 **International or multiple countries**
 <https://members.nielasher.com/>
 <http://www.therapistlocator.net/imis15/tl/Default.aspx>
@@ -358,7 +348,6 @@ the command `tbs!database`.""", colour=discord.Colour.green())
 <https://www.onlinecounselling.com/therapist-finder/>
 <https://www.goodtherapy.org/international-search.html>
 <https://help.recoverywarriors.com/listings/?search_keywords=&search_location=&search_radius=500&search_lat=0&search_lng=0&search_region=>
-
 **USA & Canada**
 <https://www.sidran.org/help-desk/get-help/>
 <https://anxietydepressionassoc.site-ym.com/?page=FATMain>
@@ -366,7 +355,6 @@ the command `tbs!database`.""", colour=discord.Colour.green())
 <https://www.psychologytoday.com/us/therapists/>
 <http://www.findcbt.org/xFAT/index.cfm>
 <http://www.isst-d.org/default.asp?contentID=18>
-
 **UK**
 <https://www.bps.org.uk/public/find-psychologist>
 <https://www.psychotherapy.org.uk/>
@@ -376,7 +364,6 @@ the command `tbs!database`.""", colour=discord.Colour.green())
 <http://www.gofal.org.uk/journeys/>
 <https://www.bpdworld.org/therapeutic-communities.html>
 <https://www.beateatingdisorders.org.uk/support-services/online-groups>
-
 **Australia**
 <https://www.1800respect.org.au/services/>
 <http://www.oneinthree.com.au/servicesandresources/>

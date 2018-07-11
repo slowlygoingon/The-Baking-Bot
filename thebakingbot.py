@@ -178,21 +178,23 @@ https://thebakingspot.tumblr.com/faq""")
 
     @commands.command(aliases=["app", "staffapp", "staffapps", "application"])
     async def apps(self):
-        await bot.say("""Here is the app to become event manager.
-https://goo.gl/forms/JDNVlMFNb34vk2Ko2
-Here is the app to become staff.
-https://goo.gl/forms/u8EuMf6RiBSFjxqy1""")
+        await bot.say("""Here is the app to become **Event manager**.
+https://goo.gl/forms/lIGVzairqpCB4Zc32
+
+Here is the app to become **Staff**.
+https://goo.gl/forms/RqzSFCJsOVM4jUMi2""")
 
 
     @commands.command(aliases=["feedbackform"])
     async def feedback(self):
         await bot.say("""Send a completely anonymous report or feedback regarding the server, other members, or Staff.
+        
 https://goo.gl/forms/2pO3gDoxKz45mNh92""")
 
 
     @commands.command()
     async def invite(self):
-        await bot.say("https://discord.io/thebakingspot")
+        await bot.say("https://discord.gg/dzDR2MF")
 
 
     @commands.command(aliases=["help", "cmds", "commandlist", "commandslist"])
@@ -207,7 +209,7 @@ If you need help with mental health, please check the Mental Health section on t
 **commands**   -   Shows this message. [help, commandslist]
 **ping**   -   Are you alive, bot?""", inline=False)
         em.add_field(name="MENTAL HEALTH", value="""**anxiety**   -   Breathing gif. [anxious, breathing, calm]
-**grounding**   -   Grounding exercises. [dissociation, panic, flashbacks]
+**grounding**   -   Grounding techniques. [dissociation, panic, flashbacks]
 **emergency**   -   Links to a page with emergency resources. Use this in case of serious suicidal ideation.
 **support**   -   If you need help or advice urgently, check this out. [getsupport, gethelp]
 **positivity**   -   Displays a random nice little gif! [positive]
@@ -220,11 +222,10 @@ If you need help with mental health, please check the Mental Health section on t
 **dice**   -   Throws a dice. [dicethrow, throwdice]
 **coinflip**   -   Flips a coin. [coin, flipcoin]
 **question**   -   Ask the bot a yes or no question. [ask]
-**randomgif**   -   Sends a random gif from giphy. [gifrandom, gif]
 **dessert**   -   Displays a random gif of a dessert.
 **cornyjoke**   -   Makes a corny joke. [joke, pun, randomjoke, randompun]
-**givecookie**   -   Give someone a cookie. [cokie]
-**hug**   -   Give someone a hug. [givehug, hugs, givehugs]""", inline=False)
+**cookie**   -   Give someone a cookie.
+**hug**   -   Give someone a hug.""", inline=False)
         em.add_field(name="MODERATING (Staff only)", value="""**clear**   -   Delete messages. [prune, purge, delete]
 **gifblacklistn**   -   Adds a word to the NSFW blacklist.
 **gifblacklistg**   -   Adds a word to the violence blacklist.
@@ -278,7 +279,8 @@ https://i.imgur.com/XbH6gP4.gif""", """Hello there, here's a gif for a breathing
 https://media.giphy.com/media/8YfwmT1T8PsfC/giphy.gif""", """Hello there, here's a gif for a breathing exercise.
 http://karlolabs.com/wp-content/uploads/2017/01/breathing.gif""", """Hello there, here's a gif for a breathing exercise.
 http://i67.tinypic.com/2qant76.gif""", """Hello there, here's a gif for a breathing exercise.
-https://media.boingboing.net/wp-content/uploads/2016/11/tumblr_og31bxrtOn1qls18ho6_400.gif"""])
+https://media.boingboing.net/wp-content/uploads/2016/11/tumblr_og31bxrtOn1qls18ho6_400.gif""", """Hello there, here's a gif for a breathing exercise.
+https://www.mindful.org/wp-content/uploads/MndfulBeath.gif"""])
         await bot.say(image)
 
     @commands.command(aliases=["ground", "dissociation", "panic", "flashbacks", "flashback"])

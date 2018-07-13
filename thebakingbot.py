@@ -1,7 +1,6 @@
 # Copyright 2018 slowlygoingon, Chanku/Sapein
 
 import discord
-import asyncio
 import random
 import datetime
 from discord.ext import commands

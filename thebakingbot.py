@@ -14,6 +14,7 @@ timenow = datetime.datetime.utcnow()
 bot.remove_command('help')
 
 @bot.event
+async def on_ready():
 game = discord.Game("with a cake")
 await client.change_presence(status=discord.Status.online, activity=game)
 

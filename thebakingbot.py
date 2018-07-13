@@ -12,6 +12,9 @@ bot = commands.Bot(description='The Baking Bot is the amazing official bot for t
 timenow = datetime.datetime.utcnow()
 bot.remove_command('help')
 
+@bot.event
+await bot.change_presence(activity=discord.Game(name="with a cake"))
+
 
 @bot.event
 async def on_ready():
